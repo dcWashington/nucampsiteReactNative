@@ -11,23 +11,16 @@ class Contact extends Component {
     render(){
         return (
             <ScrollView>
-                <Card wrapperStyle={{margin: 20}}>
-                    <Text>Contact Information</Text>
-                    {/* <Card.Divider/> */}
+                <Card title="Contact Information" wrapperStyle={{margin: 20}}>
                     <Text>1 Nucamp Way</Text>
                     <Text>Seattle, WA 98001</Text>
                     <Text style={{marginBottom: 10}}>U.S.A</Text>
+                    <Text>1 Nucamp Way</Text>
+                    <Text>Phone: 1-206-555-1234</Text>
+                    <Text>Email: campsites@nucamp.co</Text>
                 </Card>
 
-                {/* <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card> */}
+               
             </ScrollView>
         )
     }
