@@ -141,3 +141,5 @@ export const addPartners = partners => ({
     type: ActionTypes.ADD_PARTNERS,
     payload: partners
 });
+
+//just updating the right commit name and exercise of the project
