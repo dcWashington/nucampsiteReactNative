@@ -142,4 +142,13 @@ export const addPartners = partners => ({
     payload: partners
 });
 
-//just updating the right commit name and exercise of the project
+export const postFavorite = campsiteId => dispatch => {
+    setTimeout(() => {
+        dispatch(addFavorite(campsiteId));
+    }, 2000);
+};
+
+export const addFavorite = campsiteId => ({
+    type: ActionTypes.ADD_FAVORITE,
+    payload: campsiteId
+});
