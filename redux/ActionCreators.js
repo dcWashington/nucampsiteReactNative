@@ -17,7 +17,7 @@ export const fetchComments = () => dispatch => {
                 throw errMess;
             })
         .then(response => response.json())
-        .then(comments => dispatch(addComments(comments)))
+        .then(comments => dispatch(addComments(comments))) // aqui esta adicionado todos os comentários na tela
         .catch(error => dispatch(commentsFailed(error.message)));
 };
 
