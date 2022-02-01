@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
+import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
@@ -55,6 +55,7 @@ function RenderCampsite(props){
 }
 
 function RenderComments({comments}){
+
     const renderCommentItem = ({item}) => {
         return (
             <View style={{margin: 10}}>
@@ -81,7 +82,10 @@ class CampsiteInfo extends Component {
         super(props);
 
         this.state = {
-            showModal: false
+            showModal: false,
+            rating: 5,
+            author: '',
+            text: ''
         }
     }
 
@@ -89,13 +93,28 @@ class CampsiteInfo extends Component {
         this.setState({showModal: !this.state.showModal});
     }
 
+    //check where to use the parameter
+    handleComment(){
+        console.log(JSON.stringify(this.state));
+        this.toggleModal;
+    }
+
+    resetForm(){
+        this.setState({
+            showModal: false,
+            rating: 5,
+            author: '',
+            text: ''
+        });   
+    }
+
     markFavorite(campsiteId) {
         this.props.postFavorite(campsiteId);
     }
-
-    markFavorite() {
-        this.setState({favorite: true});
-    }
+    // check this
+    // markFavorite() {
+    //     this.setState({favorite: true});
+    // }
 
     static navigationOptions = {
         title: 'Campsite Information'
@@ -120,13 +139,49 @@ class CampsiteInfo extends Component {
                     onRequestClose={() => this.toggleModal()}
                 >
                     <View style={styles.modal}>
-                       <View style={{margin: 10}}>
+                        <Rating 
+                            showRating
+                            startingValue={1}
+                            imageSize={40}
+                            onFinishRating={rating => this.setState({rating: rating})} 
+                            style={{paddingVertical: 10}}
+                            count={5}
+                            defaultRating={3}
+                        />
+                       <Input 
+                            placeholder='Author'
+                            leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                            leftIconContainerStyle={{paddingRight: 10}}
+                            onChangeText={author => this.setState({ author: author })}
+                            value={this.state.author}
+                        />
+                       <Input 
+                            placeholder='Comment'
+                            leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
+                            leftIconContainerStyle={{paddingRight: 10}}
+                            onChangeText={text => this.setState({ text: text })}
+                            value={this.state.text}
+                        />
+                        <View style={{margin: 10}}>
+                            <Button
+                                onPress={() => {
+                                    this.handleComment(campsiteId);
+                                    this.resetForm();
+                                }}                            
+                                color='#5637DD'
+                                title='Submit'
+                            />
+                        </View>
+                        <View style={{margin: 10}}>
                            <Button
-                                onPress={this.toggleModal}
+                                onPress={() => {
+                                    this.toggleModal();
+                                    this.resetForm();
+                                }}
                                 color='#808080'
                                 title='Cancel'
                            />
-                       </View>
+                        </View>
                     </View>
                 </Modal>
             </ScrollView>
