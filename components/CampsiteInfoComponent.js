@@ -4,6 +4,7 @@ import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite } from '../redux/ActionCreators';
+import { postComment } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -14,7 +15,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    postFavorite: campsiteId => (postFavorite(campsiteId))
+    postFavorite: campsiteId => (postFavorite(campsiteId)),
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
+
 };
 
 function RenderCampsite(props){
@@ -98,9 +101,8 @@ class CampsiteInfo extends Component {
         this.setState({showModal: !this.state.showModal});
     }
 
-    //check where to use the parameter
-    handleComment(){
-        console.log(JSON.stringify(this.state));
+    handleComment(campsiteId){
+        postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         this.toggleModal;
     }
 
@@ -116,10 +118,6 @@ class CampsiteInfo extends Component {
     markFavorite(campsiteId) {
         this.props.postFavorite(campsiteId);
     }
-    // check this
-    // markFavorite() {
-    //     this.setState({favorite: true});
-    // }
 
     static navigationOptions = {
         title: 'Campsite Information'
