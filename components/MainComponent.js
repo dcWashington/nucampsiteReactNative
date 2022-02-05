@@ -15,13 +15,15 @@ import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
 import { fetchCampsites, fetchComments, fetchPromotions,
-    fetchPartners } from '../redux/ActionCreators';
+    fetchPartners, postComment} from '../redux/ActionCreators';
 
 const mapDispatchToProps = {
     fetchCampsites,
     fetchComments,
     fetchPromotions,
-    fetchPartners
+    fetchPartners,
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text)),
+
 };
 
 const DirectoryNavigator = createStackNavigator(
