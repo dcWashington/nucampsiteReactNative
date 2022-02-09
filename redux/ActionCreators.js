@@ -32,16 +32,6 @@ export const addComments = comments => ({
 });
 
 export const postComment = (campsiteId, rating, author, text) => dispatch => {
-    // const newComment = {
-    //     campsiteId,
-    //     rating,
-    //     author,
-    //     text
-    // };
-    // newComment.date = new Date().toISOString();
-    // setTimeout(() => {
-    //     dispatch(addComment(newComment));
-    // }, 2000);
     const newComment = {
         campsiteId: campsiteId,
         rating: rating,
@@ -49,31 +39,12 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
         text: text
     };
     newComment.date = new Date().toISOString();
+    
+    setTimeout(() => {
+        dispatch(addComment(newComment))
+    }, 2000)
 
-    return fetch(baseUrl + 'comments', {
-        method: "POST",
-        body: JSON.stringify(newComment),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => {
-            if (response.ok) {
-                return response;
-            } else {
-                const error = new Error(`Error ${response.status}: ${response.statusText}`);
-                error.response = response;
-                throw error;
-            }
-        },
-        error => { throw error; }
-    )
-    .then(response => response.json())
-    .then(response => dispatch(addComment(response)))
-    .catch(error => {
-        // console.log('post comment', error.message);
-        // alert('Your comment could not be posted\nError: ' + error.message);
-    });
+
 };
 
 export const addComment = comment => ({
