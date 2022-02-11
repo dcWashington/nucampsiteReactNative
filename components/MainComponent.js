@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
+import Login from './LoginComponent';
 import Directory from './DirectoryComponent';
 import Reservation from './ReservationComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
@@ -170,6 +171,29 @@ const FavoritesNavigator = createStackNavigator(
     }
 );
 
+const LoginNavigator = createStackNavigator(
+    {
+        Login: { screen: Login }
+    },
+    {
+        defaultNavigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon
+                name='sign-in'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+);
+
 const CustomDrawerContentComponent = props => (
     <ScrollView>
         <SafeAreaView 
@@ -190,6 +214,20 @@ const CustomDrawerContentComponent = props => (
 
 const MainNavigator = createDrawerNavigator(
     {
+        Login: {
+            screen: LoginNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='sign-in'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+        },
+        
         Home: {
             screen: HomeNavigator,
             navigationOptions: {
@@ -203,6 +241,7 @@ const MainNavigator = createDrawerNavigator(
                 )
             }
         },
+
         Directory: {
             screen: DirectoryNavigator,
             navigationOptions: {
@@ -216,6 +255,7 @@ const MainNavigator = createDrawerNavigator(
                 )
             }
         },
+
         Reservation: {
             screen: ReservationNavigator,
             navigationOptions: {
@@ -230,6 +270,7 @@ const MainNavigator = createDrawerNavigator(
                 )
             }
         },
+
         Favorites: {
             screen: FavoritesNavigator,
             navigationOptions: {
@@ -244,6 +285,7 @@ const MainNavigator = createDrawerNavigator(
                 )
             }
         },
+
         About: {
             screen: AboutNavigator,
             navigationOptions: {
@@ -258,6 +300,7 @@ const MainNavigator = createDrawerNavigator(
                 )
             }
         },
+
         Contact: {
             screen: ContactNavigator,
             navigationOptions: {
@@ -274,6 +317,7 @@ const MainNavigator = createDrawerNavigator(
         }
     },
     {
+        initialRouteName: 'Home',
         drawerBackgroundColor: '#CEC8FF',
         contentComponent: CustomDrawerContentComponent
     }
