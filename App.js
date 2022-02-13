@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, LogBox } from "react-native";
+// import { View, LogBox } from "react-native";
 import Main from './components/MainComponent';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
@@ -8,7 +8,7 @@ import Loading from './components/LoadingComponent';
 
 const { persistor, store } = ConfigureStore();
 
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
 export default function App() {
     return (
